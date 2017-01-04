@@ -57,3 +57,15 @@ function fromCache(request) {
     return cache.match(request);
   });
 }
+
+self.addEventListener('message', function(event){
+    console.log("SW Received Message: " + event.data);
+});
+
+function send_message_to_sw(msg){
+    navigator.serviceWorker.controller.postMessage("Message from service worker: '"+msg+"'");
+}
+
+function displayMessage(message) {
+    console.log('SW displaying message: ' + message);
+}
