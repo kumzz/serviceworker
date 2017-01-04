@@ -34,3 +34,14 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+function displayMessage(message) {
+  if (navigator.serviceWorker.controller) {
+    console.log("Page sending message to service worker");
+    navigator.serviceWorker.controller.postMessage({
+      "command": "oneWayCommunication",
+      "message": message
+    });
+  } else {
+    console.log("ServiceWorker not available");
+  }
+}
