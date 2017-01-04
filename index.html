@@ -9,11 +9,19 @@
     <script src="app.js"></script>
     
     <input type="button" value="Say hello" onClick="showAndroidToast('Hello World!')" />
+    <input type="button" value="reload" onClick="reloadPage()" />
 
     <script type="text/javascript">
-    function showAndroidToast(toast) {
+      function showAndroidToast(toast) {
         Android.showToast(toast);
-    }
+      }
+      function reloadPage() {
+        if (navigator.serviceWorker.controller) {
+          navigator.serviceWorker.controller.postMessage({
+            "message": "reload"
+          });
+        }
+      }
     </script>
   </body>
 </html>
