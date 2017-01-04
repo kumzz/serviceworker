@@ -15,6 +15,14 @@ this.addEventListener('install', function(event) {
 
 this.addEventListener('fetch', function(event) {
   console.log('The service worker is serving the asset.');
+  if (typeof Android != "undefined") {
+    Android.showToast(toast);
+    console.log('JS Bridge can be accessed from SW');
+  }
+  else {
+    console.log('JS Bridge can be accessed from SW');
+  }
+   
   event.respondWith(fromCache(event.request));
   
   event.waitUntil(
