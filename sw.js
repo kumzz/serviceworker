@@ -20,7 +20,7 @@ this.addEventListener('fetch', function(event) {
     console.log('JS Bridge can be accessed from SW');
   }
   else {
-    console.log('JS Bridge can be accessed from SW');
+    console.log('JS Bridge cannot be accessed from SW');
   }
    
   event.respondWith(fromCache(event.request));
