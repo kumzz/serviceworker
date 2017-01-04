@@ -67,7 +67,7 @@ function send_message_to_sw(msg){
 }
 
 function displayMessage(message) {
-    console.log('SW displaying message: ' + message);
+    console.log('SW displaying message: ' + JSON.stringify(message));
 }
 
 self.addEventListener('message', function(event) {
