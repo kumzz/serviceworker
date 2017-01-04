@@ -24,5 +24,13 @@ if ('serviceWorker' in navigator) {
     console.log('Reloading page');
     location.reload();
   }
+  
+  navigator.serviceWorker.addEventListener('controllerchange', function(event) {
+    console.log('A controllerchange event has happened');
+  );
+    
+  navigator.serviceWorker.controller.addEventListener('statechange', function() {
+      console.log('A statechange has occured');
+  );
 }
 
