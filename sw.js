@@ -37,7 +37,7 @@ function refresh(response) {
         type: 'refresh',
         url: response.url,
       };
-      client.postMessage(JSON.stringify(message));
+      //client.postMessage(JSON.stringify(message));
     });
   });
 }
@@ -69,3 +69,11 @@ function send_message_to_sw(msg){
 function displayMessage(message) {
     console.log('SW displaying message: ' + message);
 }
+
+self.addEventListener('message', function(event) {
+    var data = event.data;
+
+    if (data.command == "oneWayCommunication") {
+        displayMessage(data.message);
+    } 
+});
