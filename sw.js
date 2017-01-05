@@ -49,7 +49,7 @@ function clearCache() {
       });
     }).catch(function(error) {
       console.log('Error while clearing cache: ' + error);
-    )};
+    });
   });
 }
 
