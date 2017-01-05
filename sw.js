@@ -47,8 +47,8 @@ function clearCache() {
           return true;
         });
       });
-    }).catch(function(e) {
-      console.log('Error while clearing cache');
+    }).catch(function(error) {
+      console.log('Error while clearing cache: ' + error);
     )};
   });
 }
@@ -83,13 +83,6 @@ function triggerRefresh() {
 
 self.addEventListener('message', function(event) {
     var data = event.data;
-
-    /*
-    if (data.command == "oneWayCommunication") {
-        displayMessage(data.message);
-    }
-    */
-  
     if (data.message == "reload") {
       triggerRefresh();
     }
