@@ -18,9 +18,8 @@ if ('serviceWorker' in navigator) {
     
     var isRefresh = message.type === 'refresh';
     if (isRefresh) {
-      console.log('Received a message from service worker');
+      console.log('Received a refresh message from service worker');
     }
-    //var isAsset = message.url.includes('asset');
     console.log('Reloading page');
     location.reload();
   }
@@ -33,17 +32,3 @@ if ('serviceWorker' in navigator) {
       console.log('A statechange has occured');
   });
 }
-
-/*
-function displayMessage(message) {
-  if (navigator.serviceWorker.controller) {
-    console.log("Page sending message to service worker");
-    navigator.serviceWorker.controller.postMessage({
-      "command": "oneWayCommunication",
-      "message": message
-    });
-  } else {
-    console.log("ServiceWorker not available");
-  }
-}
-*/
