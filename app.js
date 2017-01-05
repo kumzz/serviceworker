@@ -27,8 +27,4 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.addEventListener('controllerchange', function(event) {
     console.log('A controllerchange event has happened');
   });
-    
-  navigator.serviceWorker.controller.addEventListener('statechange', function() {
-      console.log('A statechange has occured');
-  });
 }
