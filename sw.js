@@ -58,16 +58,52 @@ function fromCache(request) {
   });
 }
 
-self.addEventListener('message', function(event){
-    console.log("SW Received Message: " + event.data);
-});
-
 function send_message_to_sw(msg){
-    navigator.serviceWorker.controller.postMessage("Message from service worker: '"+msg+"'");
+  navigator.serviceWorker.controller.postMessage("Message from service worker: '"+msg+"'");
 }
 
 function displayMessage(message) {
-    console.log('SW displaying message: ' + JSON.stringify(message));
+  console.log('SW displaying message: ' + JSON.stringify(message));
+}
+
+function clearCache() {
+  return caches.open(CACHE).then(function(cache) {
+    return cache.delete('/serviceworker/').then(function () {
+      return cache.delete('/serviceworker/index.html').then(function () {
+        return cache.delete('/serviceworker/app.js').then(function () {
+          return true;
+        });
+      });
+    });
+  });
+}
+
+function cacheAssets() {
+  return caches.open(CACHE).then(function(cache) {
+    return cache.addAll([
+        '/serviceworker/',
+        '/serviceworker/index.html',
+        '/serviceworker/app.js'
+      ]);
+  });
+}
+
+function refreshUrl() {
+  return self.clients.matchAll().then(function (clients) {
+    clients.forEach(function (client) {
+      var message = {
+        type: 'refresh'
+      };
+      client.postMessage(JSON.stringify(message));
+    });
+  });
+}
+
+function triggerRefresh() {
+  console.log('SW triggerRefresh called');
+  clearCache().then(cacheAssets).then(refreshUrl).catch(function(e) {
+    console.log('SW Error while refresh');
+  }
 }
 
 self.addEventListener('message', function(event) {
@@ -75,5 +111,9 @@ self.addEventListener('message', function(event) {
 
     if (data.command == "oneWayCommunication") {
         displayMessage(data.message);
-    } 
+    }
+  
+    if (data.message == "reload") {
+      triggerRefresh();
+    }
 });
