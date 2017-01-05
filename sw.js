@@ -99,7 +99,7 @@ function triggerRefresh() {
   console.log('SW triggerRefresh called');
   clearCache().then(cacheAssets).then(refreshUrl).catch(function(e) {
     console.log('SW Error while refresh');
-  }
+  });
 }
 
 self.addEventListener('message', function(event) {
