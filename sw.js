@@ -2,6 +2,7 @@ var CACHE = 'cache-v1';
 
 this.addEventListener('install', function(event) {
   console.log('The service worker is being installed');
+  /*
   event.waitUntil(
     caches.open(CACHE).then(function(cache) {
       return cache.addAll([
@@ -11,13 +12,17 @@ this.addEventListener('install', function(event) {
       ]);
     })
   );
+  */
 });
 
+/*
 this.addEventListener('fetch', function(event) {
   console.log('The service worker is serving the asset.'); 
   event.respondWith(fromCache(event.request));
 });
+*/
 
+/*
 function update(request) {
   return caches.open(CACHE).then(function (cache) {
     return fetch(request).then(function (response) {
@@ -27,17 +32,21 @@ function update(request) {
     });
   });
 }
+*/
 
+/*
 function fromCache(request) {
   return caches.open(CACHE).then(function (cache) {
     return cache.match(request);
   });
 }
+*/
 
 function displayMessage(message) {
   console.log('SW displaying message: ' + JSON.stringify(message));
 }
 
+/*
 function clearCache() {
   return caches.open(CACHE).then(function(cache) {
     return cache.delete('/serviceworker/').then(function () {
@@ -52,7 +61,9 @@ function clearCache() {
     });
   });
 }
+*/
 
+/*
 function cacheAssets() {
   return caches.open(CACHE).then(function(cache) {
     return cache.addAll([
@@ -62,6 +73,7 @@ function cacheAssets() {
       ]);
   });
 }
+*/
 
 function refreshUrl() {
   return self.clients.matchAll().then(function (clients) {
@@ -74,16 +86,26 @@ function refreshUrl() {
   });
 }
 
+/*
 function triggerRefresh() {
   console.log('SW triggerRefresh called');
   clearCache().then(cacheAssets).then(refreshUrl).catch(function(e) {
     console.log('SW Error while refresh');
   });
 }
+*/
 
 self.addEventListener('message', function(event) {
     var data = event.data;
     if (data.message == "reload") {
-      triggerRefresh();
+      //triggerRefresh();
+      
+      // Call a JSBridge API to clear cache and reload
+      refreshUrl().then(function() {
+        console.log('SW Refresh and reload has been triggered');
+      })
+      .catch(function() {
+        console.log('SW Exception while doing refresh and reload');
+      });
     }
 });
