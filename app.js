@@ -20,7 +20,7 @@ if ('serviceWorker' in navigator) {
     if (isRefresh) {
       console.log('Received a message from service worker');
     }
-    var isAsset = message.url.includes('asset');
+    //var isAsset = message.url.includes('asset');
     console.log('Reloading page');
     location.reload();
   }
@@ -34,6 +34,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+/*
 function displayMessage(message) {
   if (navigator.serviceWorker.controller) {
     console.log("Page sending message to service worker");
@@ -45,3 +46,4 @@ function displayMessage(message) {
     console.log("ServiceWorker not available");
   }
 }
+*/
