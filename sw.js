@@ -105,9 +105,11 @@ function triggerRefresh() {
 self.addEventListener('message', function(event) {
     var data = event.data;
 
+    /*
     if (data.command == "oneWayCommunication") {
         displayMessage(data.message);
     }
+    */
   
     if (data.message == "reload") {
       triggerRefresh();
