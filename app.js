@@ -1,6 +1,5 @@
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/serviceworker/sw.js', { scope: '/serviceworker/' }).then(function(reg) {
-    
+  navigator.serviceWorker.register('/serviceworker/sw.js').then(function(reg) {
     if(reg.installing) {
       console.log('Service worker installing');
     } else if(reg.waiting) {
@@ -15,13 +14,12 @@ if ('serviceWorker' in navigator) {
   
   navigator.serviceWorker.onmessage = function (event) {
     var message = JSON.parse(event.data);
-    
     var isRefresh = message.type === 'refresh';
-    if (isRefresh) {
+    if (isRefresh && typeof Android != "undefined") {
       console.log('Received a refresh message from service worker');
+      console.log('app.js: Reloading page');
+      Android.reload();
     }
-    console.log('Reloading page');
-    location.reload();
   }
   
   navigator.serviceWorker.addEventListener('controllerchange', function(event) {
