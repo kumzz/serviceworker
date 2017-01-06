@@ -1,4 +1,4 @@
-var CACHE = 'cache-v1';
+//var CACHE = 'cache-v1';
 
 this.addEventListener('install', function(event) {
   console.log('The service worker is being installed');
@@ -15,12 +15,10 @@ this.addEventListener('install', function(event) {
   */
 });
 
-/*
 this.addEventListener('fetch', function(event) {
-  console.log('The service worker is serving the asset.'); 
-  event.respondWith(fromCache(event.request));
+  console.log('The service worker receiving fetch request'); 
+  //event.respondWith(fromCache(event.request));
 });
-*/
 
 /*
 function update(request) {
