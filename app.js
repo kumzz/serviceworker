@@ -32,19 +32,26 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.addEventListener('controllerchange', function(event) {
     console.log('A controllerchange event has happened');
   });
-}
 
-navigator.serviceWorker.ready.then(function(registration) {
-  registration.periodicSync.register({
-    tag: 'reload-trigger',         // default: ''
-    minPeriod: 10000,
-    powerState: 'auto',
-    networkState: 'online'
-  }).then(function(periodicSyncReg) {
-    // success
-    console.log('Periodic sync registration successful');
-  }, function() {
-    // failure
-    console.log('Error in periodic sync registration');
-  })
-});
+  navigator.serviceWorker.ready.then(function(registration) {
+    if (registration.periodicSync) {
+      
+      registration.periodicSync.register({
+        tag: 'reload-trigger',         // default: ''
+        minPeriod: 10000,
+        powerState: 'auto',
+        networkState: 'online'
+      })
+      .then(function(periodicSyncReg) {
+        // success
+        console.log('Periodic sync registration successful');
+      })
+      .catch(function(error) {
+        // failure
+        console.log('Error in periodic sync registration');
+      })
+    } else {
+      console.log('app.js: Background sync is not supported');
+    }
+  });
+}
