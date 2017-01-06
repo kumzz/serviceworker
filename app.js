@@ -42,9 +42,9 @@ navigator.serviceWorker.ready.then(function(registration) {
     networkState: 'online'
   }).then(function(periodicSyncReg) {
     // success
-    console.log('Received a periodic sync in service worker');
+    console.log('Periodic sync registration successful');
   }, function() {
     // failure
-    console.log('Error receiving periodic sync in service worker');
+    console.log('Error in periodic sync registration');
   })
 });
