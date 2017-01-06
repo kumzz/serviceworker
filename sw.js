@@ -2,16 +2,17 @@ var CACHE = 'cache-v1';
 
 this.addEventListener('install', function(event) {
   console.log('The service worker is being installed');
+  /*
   event.waitUntil(
     caches.open(CACHE).then(function(cache) {
       return cache.addAll([
         //'/serviceworker/',
         //'/serviceworker/index.html',
-        '/serviceworker/app.js',
-        '/serviceworker/app1.js'
+        //'/serviceworker/app.js',
       ]);
     })
   );
+  */
 });
 
 this.addEventListener('fetch', function(event) {
