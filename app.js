@@ -18,14 +18,14 @@ if ('serviceWorker' in navigator) {
     if (isRefresh && typeof Android != "undefined") {
       console.log('Received a refresh message from service worker');
       console.log('app.js: Reloading page');
-      setTimeout(function() {
+      //setTimeout(function() {
         if (document.hidden) {
           console.log('app.js: Webview is hidden.');
           Android.reload();
         } else {
         console.log('app.js: Webview is visible. Not reloading page');
         }
-      }, 10000);
+      //}, 10000);
     }
   }
   
