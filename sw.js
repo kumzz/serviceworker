@@ -99,13 +99,16 @@ self.addEventListener('message', function(event) {
     var data = event.data;
     if (data.message == "reload") {
       //triggerRefresh();
+      console.log('SW has received a reload message');
       
-      // Call a JSBridge API to clear cache and reload
-      refreshUrl().then(function() {
-        console.log('SW Refresh and reload has been triggered');
-      })
-      .catch(function() {
-        console.log('SW Exception while doing refresh and reload');
-      });
+      setTimeout(function() {
+        // Call a JSBridge API to clear cache and reload
+        refreshUrl().then(function() {
+          console.log('SW Refresh and reload has been triggered');
+        })
+        .catch(function() {
+          console.log('SW Exception while doing refresh and reload');
+        });
+      }, 10000);
     }
 });
