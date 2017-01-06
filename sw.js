@@ -112,3 +112,13 @@ self.addEventListener('message', function(event) {
       }, 10000);
     }
 });
+
+self.addEventListener('periodicsync', function(event) {
+  if (event.registration.tag == 'reload-trigger') {
+    console.log('Received a periodic sync in service worker');
+  }
+  else {
+    // unknown sync, may be old, best to unregister
+    event.registration.unregister();
+  }
+});
