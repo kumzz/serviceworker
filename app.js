@@ -33,3 +33,18 @@ if ('serviceWorker' in navigator) {
     console.log('A controllerchange event has happened');
   });
 }
+
+navigator.serviceWorker.ready.then(function(registration) {
+  registration.periodicSync.register({
+    tag: 'reload-trigger',         // default: ''
+    minPeriod: 10000,
+    powerState: 'auto',
+    networkState: 'online'
+  }).then(function(periodicSyncReg) {
+    // success
+    console.log('Received a periodic sync in service worker');
+  }, function() {
+    // failure
+    console.log('Error receiving periodic sync in service worker');
+  })
+});
