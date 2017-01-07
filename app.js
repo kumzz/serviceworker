@@ -12,6 +12,10 @@ if ('serviceWorker' in navigator) {
     console.log('Registration failed with ' + error);
   });
   
+  function isPageHidden(){
+     return document.hidden || document.msHidden || document.webkitHidden || document.mozHidden;
+ }
+  
   navigator.serviceWorker.onmessage = function (event) {
     var message = JSON.parse(event.data);
     var isRefresh = message.type === 'refresh';
@@ -19,7 +23,7 @@ if ('serviceWorker' in navigator) {
       console.log('Received a refresh message from service worker');
       console.log('app.js: Reloading page');
       //setTimeout(function() {
-        if (document.hidden) {
+        if (isPageHidden()) {
           console.log('app.js: Webview is hidden.');
           Android.reload();
         } else {
