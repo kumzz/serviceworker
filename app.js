@@ -63,6 +63,6 @@ if ('serviceWorker' in navigator) {
     console.log('SW normal sync registration');
     return registration.sync.register('reload-sync');
   }).catch(function(error) {
-    console.log('Error in sync registration ': + error);
+    console.log('Error in sync registration: ' + error);
   });
 }
