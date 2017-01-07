@@ -60,10 +60,9 @@ if ('serviceWorker' in navigator) {
   });
   
   navigator.serviceWorker.ready.then(function(registration) {
-    if (registration.sync) {
-      registration.sync.register('reload-sync');
-    }).catch(function(error) {
-      console.log('Error in sync registration ': + error);
-    });
+    console.log('SW normal sync registration');
+    return registration.sync.register('reload-sync');
+  }).catch(function(error) {
+    console.log('Error in sync registration ': + error);
   });
 }
