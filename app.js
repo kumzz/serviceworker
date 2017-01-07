@@ -51,7 +51,19 @@ if ('serviceWorker' in navigator) {
         console.log('Error in periodic sync registration');
       })
     } else {
-      console.log('app.js: Background sync is not supported');
+      console.log('app.js: Periodic sync is not supported');
+    }
+  });
+  
+  navigator.serviceWorker.ready.then(function(registration) {
+    if (registration.sync) {
+      registration.sync.register('reload-sync').then(function() {
+        // registration succeeded
+      }, function() {
+        // registration failed
+      });
+    } else {
+      console.log('app.js: Normal sync is not supported');
     }
   });
 }
