@@ -59,9 +59,10 @@ if ('serviceWorker' in navigator) {
     if (registration.sync) {
       registration.sync.register('reload-sync').then(function() {
         console.log('Sync registration successful');
-      }, function() {
+      })
+      .catch(function(error) {
         console.log('Error in sync registration');
-      });
+      })
     } else {
       console.log('app.js: Normal sync is not supported');
     }
