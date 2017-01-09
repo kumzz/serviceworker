@@ -24,13 +24,13 @@ if ('serviceWorker' in navigator) {
       console.log('app.js: Reloading page');
       //setTimeout(function() {
         //if (isPageHidden()) {
-        if (!Android.isConnectedToNetwork()) {
-          console.log('app.js: No internet connection. Not reloading');
-          Android.showToast('No internet connection. Not reloading');
-        } else {
-          console.log('app.js: Webview is invisible. Reloading page');
+        if (Android.isConnectedToNetwork()) {
+          console.log('app.js: Connected to network. Reloading');
+          Android.showToast('Connected to network. Reloading');
           Android.reload();
-          Android.showToast('Reloaded page');
+        } else {
+          console.log('app.js: Not connected to network. Not reloading');
+          Android.showToast('Not connected to network. Not reloading');
         }
       //}, 10000);
     }
