@@ -65,4 +65,22 @@ if ('serviceWorker' in navigator) {
   }).catch(function(error) {
     console.log('Error in sync registration: ' + error);
   });
+  
+  navigator.serviceWorker.ready.then(function(registration) {
+    if (registration.pushManager) {
+      console.log('registration.pushManager is available');
+      registration.pushManager.subscribe({userVisibleOnly: true})
+      .then(function(subscription) {
+        console.log('push API subscription available');
+      })
+      .catch(function(e) {
+        if (Notification.permission === 'denied') {
+          console.log('Permission for Notifications was denied');
+        } else {
+          console.log('Unable to subscribe to push.', e);
+        }
+      });
+    } else {
+      console.log('Push API is not suppported');
+    }
 }
