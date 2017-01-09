@@ -24,7 +24,7 @@ if ('serviceWorker' in navigator) {
       console.log('app.js: Reloading page');
       //setTimeout(function() {
         //if (isPageHidden()) {
-        if (!Android.isNetworkOnline()) {
+        if (!Android.isConnectedToNetwork()) {
           console.log('app.js: No internet connection. Not reloading');
           Android.showToast('No internet connection. Not reloading');
         } else {
