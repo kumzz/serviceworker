@@ -83,4 +83,5 @@ if ('serviceWorker' in navigator) {
     } else {
       console.log('Push API is not suppported');
     }
+  });
 }
