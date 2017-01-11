@@ -2,6 +2,7 @@ var CACHE = 'cache-v1';
 
 this.addEventListener('install', function(event) {
   console.log('The service worker is being installed');
+  event.waitUntil(self.skipWaiting());
   /*
   event.waitUntil(
     caches.open(CACHE).then(function(cache) {
@@ -13,6 +14,11 @@ this.addEventListener('install', function(event) {
     })
   );
   */
+});
+
+self.addEventListener('activate', function(event) {
+  console.log('The service worker is being activated');
+  event.waitUntil(self.clients.claim());
 });
 
 this.addEventListener('fetch', function(event) {
