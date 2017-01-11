@@ -1,4 +1,5 @@
 var CACHE = 'cache-v1';
+var refreshIntervalId;
 
 this.addEventListener('install', function(event) {
   console.log('The service worker is being installed');
@@ -19,7 +20,32 @@ this.addEventListener('install', function(event) {
 self.addEventListener('activate', function(event) {
   console.log('The service worker is being activated');
   event.waitUntil(self.clients.claim());
+  
+  createPeriodicTimer();
 });
+
+
+function createPeriodicTimer() {
+  console.log('Creating periodic trigger timer');
+  refreshIntervalId = setInterval(refreshStore, 5000);
+}
+
+function refreshStore() {
+  console.log('Calling setInterval');
+  if (false)
+  {
+     if (typeof refreshIntervalId != "undefined") {
+       clearInterval(refreshIntervalId);
+       console.log('Change interval to 10 seconds');
+       refreshIntervalId = setInterval(refreshStore, 10000);
+     }
+      else {
+       console.log('id is undefined');
+     }
+  } else {
+    console.log('Clearing cache');
+  }
+}
 
 this.addEventListener('fetch', function(event) {
   console.log('The service worker receiving fetch request'); 
